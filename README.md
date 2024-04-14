@@ -1,8 +1,8 @@
 # build the docker image 
 ```
-git clone <this-repo's-url>
+git clone https://github.com/abdalrahman01/p22_p43.git
 
-cd <this-repo's-name>
+cd p22_p43
 
 sudo docker build -t blender_infinigen_headless . 
 
