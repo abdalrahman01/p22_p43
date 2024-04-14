@@ -10,13 +10,10 @@ WORKDIR /opt/
 RUN git clone https://github.com/abdalrahman01/p22_infinigen.git infinigen
 WORKDIR /opt/infinigen
 COPY run.py .
-COPY install.bash .
 RUN conda init bash \
     && . ~/.bashrc \
     && conda create --name infinigen python=3.10 \
     && conda activate infinigen
-#     && pip install -e .\
-#     && FINIGEN_MINIMAL_INSTALL=True bash scripts/install/interactive_blender.sh
 
 RUN conda init
 CMD ["bash", "-c", "source ~/.bashrc && conda init bash && conda activate infinigen && python run.py"]
