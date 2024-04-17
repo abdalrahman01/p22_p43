@@ -54,7 +54,4 @@ RUN npm install
 
 WORKDIR /opt/
 RUN npm install
-#CMD ["bash", "-c", "source ~/.bashrc && conda init bash && conda activate infinigen && python /opt/run.py"]
 CMD ["npm", "start"]
-
-#docker run -p 9070:9070 
