@@ -17,7 +17,7 @@ in this repository there is a test python script `testScene.py` that you can run
 in the same dir:
 
 ```
-blender/blender -b -P testScene.py
+/opt/infinigen/blender/blender -b -P /opt/infinigen/testScene.py
 ```
 
 the output should be a file called `cup_dish.glb` in the same dir.
