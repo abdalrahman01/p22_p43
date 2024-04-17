@@ -38,10 +38,6 @@ COPY public/ ./public/
 COPY package.json .
 COPY package-lock.json .
 
-
-
-
-
 # Expose port for Express server which we are using instead of RUN conda init 
 EXPOSE 3000
 
