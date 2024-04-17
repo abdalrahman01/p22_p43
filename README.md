@@ -6,25 +6,10 @@ cd p22_p43
 
 sudo docker build -t blender_infinigen_headless . 
 
-sudo docker run blender_infinigen_headless:latest
-
-sudo docker exec -it <container-id> /bin/bash
-```
-
-Now you are in the container and you need to manually install some additional stuff.
+sudo docker run -p 3000:3000 server 
 
 ```
-conda activate infinigen
 
-INFINIGEN_MINIMAL_INSTALL=True bash scripts/install/interactive_blender.sh
-```
-
-
-## how to get the container-id 
-
-```
-sudo docker container ls -a
-```
 
 # How to make a test run: 
 in this repository there is a test python script `testScene.py` that you can run to test the blender installation. 
@@ -32,7 +17,7 @@ in this repository there is a test python script `testScene.py` that you can run
 in the same dir:
 
 ```
-blender/blender -b -P testScene.py
+/opt/infinigen/blender/blender -b -P /opt/infinigen/testScene.py
 ```
 
 the output should be a file called `cup_dish.glb` in the same dir.
