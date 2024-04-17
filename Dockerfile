@@ -14,29 +14,37 @@ RUN echo "Using Conda image" && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-WORKDIR /opt/
-RUN git clone https://github.com/abdalrahman01/p22_infinigen.git infinigen
-WORKDIR /opt/infinigen
 
 
+
+# Installing all of python dependencies
 RUN conda init bash \
     && . ~/.bashrc \
     && conda create --name infinigen python=3.10 \
     && conda activate infinigen
+
+# install blender and infinigen
+WORKDIR /opt/
+RUN git clone https://github.com/abdalrahman01/p22_infinigen.git infinigen
+WORKDIR /opt/infinigen 
+
+COPY install_blender.sh ./
+RUN chmod +x install_blender.sh
+RUN ./install_blender.sh || true
 
 # Installing everthing for Express server
 # Copy server files
 WORKDIR /opt/
 COPY server/ ./server/
 COPY server/package.json ./
-COPY run.py .
 
 COPY src/ ./src/
 COPY src/components/ ./src/components/
 
 COPY public/ ./public/ 
 COPY package.json .
-COPY package-lock.json .
+
+
 
 # Expose port for Express server which we are using instead of RUN conda init 
 EXPOSE 3000
