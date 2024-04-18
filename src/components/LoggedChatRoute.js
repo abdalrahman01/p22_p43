@@ -6,6 +6,11 @@ import Button from 'react-bootstrap/Button'
 import ModelView from './ModelViewer.js'
 import axios from 'axios';
 
+const P22_PORT = 4056;
+const P22_HOST = "localhost";
+const UPDATE_PYTHON_SCRIPT_URL = "/update_python_script";
+const BLENDER_EXEC_URL = `http://${P22_HOST}:${P22_PORT}${UPDATE_PYTHON_SCRIPT_URL}`;
+
 const LoggedChatRoute = (props) => {
   const history = useHistory();
   const [searchTerm, setSearchTerm] = useState('');
@@ -40,9 +45,8 @@ const LoggedChatRoute = (props) => {
 
     const handleBlenderExecution = async () => {
       try {
-        // Make a POST request to the backend endpoint for Blender execution
-        await axios.post('/execute-blender');
-        alert('Blender command executed successfully');
+        const response = await fetch(BLENDER_EXEC_URL); 
+        console.log('response:', response);   
       } catch (error) {
         console.error('Failed to execute Blender command:', error);
         alert('Failed to execute Blender command');

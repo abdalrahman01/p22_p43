@@ -32,7 +32,7 @@ const ModelViewer = () => {
     controls.current.enablePan = true;
 
     const loader = new GLTFLoader();
-      loader.load('/models/scene.gltf', (gltf) => {
+      loader.load('/models/cup_dish.glb', (gltf) => {
         model.current = gltf.scene;
 
       // Traverse through the model to apply the texture

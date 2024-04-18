@@ -24,6 +24,7 @@ RUN conda init bash \
     && conda activate infinigen
 
 # install blender and infinigen
+
 WORKDIR /opt/
 RUN git clone https://github.com/abdalrahman01/p22_infinigen.git infinigen
 WORKDIR /opt/infinigen 
@@ -31,6 +32,14 @@ WORKDIR /opt/infinigen
 COPY install_blender.sh ./
 RUN chmod +x install_blender.sh
 RUN ./install_blender.sh || true
+
+
+COPY p22/ /opt/p22
+WORKDIR /opt/p22
+
+RUN pip install -r requirements.txt
+
+
 
 # Installing everthing for Express server
 # Copy server files
@@ -54,4 +63,7 @@ RUN npm install
 
 WORKDIR /opt/
 RUN npm install
-CMD ["npm", "start"]
+
+COPY run.sh ./
+
+CMD ["bash", "run.sh"]
