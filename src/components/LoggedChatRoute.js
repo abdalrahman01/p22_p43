@@ -4,7 +4,7 @@ import FloatingLabel from 'react-bootstrap/FormLabel'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import ModelView from './ModelViewer.js'
-import axios from 'axios';
+
 
 const P22_PORT = 4056;
 const P22_HOST = "localhost";
@@ -53,29 +53,55 @@ const LoggedChatRoute = (props) => {
       }
     };
   
+    const handleDownloadModel = () => {
+      const link = document.createElement('a');
+      link.href = '/models/scene.gltf'; // Change the path to your model file
+      link.download = 'model.gltf';
+      link.click();
+    };
+
+    
+       
+  
+  
     return (
       <div className="chat">
-        <h2>Search for 3D model</h2>
-        <div id="ModelViewer">
-          <ModelView />
-        </div>
+        <h2>Your 3D model</h2>
+        {/* Ensure LoggedChatRoute is rendered only once */}
+        <div id="model_viewer"><ModelView /></div>
         <div>
-          <Form id="comment_form" onSubmit={handleSubmit} method="POST">
-            <FloatingLabel label="Write a message">
-              <Form.Control
-                as="textarea"
-                id="writing_box"
-                placeholder="Write our text here"
-                value={content}
-                onChange={(e) => setContent(e.target.value)}
-              />
-            </FloatingLabel>
-            <Button variant="primary" id="btn_send_writing_box" type="submit">
+            <Form
+                id="comment_form"
+                onSubmit={handleSubmit}
+                method="POST">
+  
+                <FloatingLabel
+                    label="Write a message">
+                    <Form.Control
+                        as="textarea"
+                        id="writing_box"
+                        placeholder="Write our text here"
+                        value={content}
+                        onChange={(e) => setContent(
+                            e.target.value)}
+                    />
+  
+                </FloatingLabel>
+            <Button 
+            variant="primary" 
+            id="btn_send_writing_box" 
+            type="submit" 
+            onClick={handleBlenderExecution}>
               Send
             </Button>
+            <button 
+            type="button"
+            onClick={handleDownloadModel}
+            variant="primary"
+            id="btn_download_model">
+              Download
+            </button>
           </Form>
-          
-          <button onClick={handleBlenderExecution}>Execute Blender Command</button>
         </div>
       </div>
     );
@@ -83,3 +109,6 @@ const LoggedChatRoute = (props) => {
   
   export default LoggedChatRoute;
   
+
+
+ 
