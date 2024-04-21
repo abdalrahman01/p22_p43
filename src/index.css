@@ -25,6 +25,13 @@ body {
   margin-bottom: 5px;
 }
 
+
+#btn_download_model{
+  width: 100px;
+  height: 60px;
+  margin-bottom: 5px;
+}
+
 #writing_box {
 	resize: none;
 	width: 500px;
