@@ -3,7 +3,7 @@ import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
-
+GENERATED_PYTHON_SCRIPT = '/models/cup_dish.glb'
 
 const ModelViewer = () => {
 
@@ -36,7 +36,7 @@ const ModelViewer = () => {
   
 
     const loader = new GLTFLoader();
-      loader.load('/models/scene.gltf', (gltf) => {
+      loader.load(GENERATED_PYTHON_SCRIPT, (gltf) => {
         model.current = gltf.scene;
 
       // Traverse through the model to apply the texture
