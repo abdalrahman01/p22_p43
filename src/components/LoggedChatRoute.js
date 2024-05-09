@@ -45,13 +45,25 @@ const LoggedChatRoute = (props) => {
 
     const handleBlenderExecution = async () => {
       try {
-        const response = await fetch(BLENDER_EXEC_URL); 
-        console.log('response:', response);   
+        const writingData = document.getElementById('writing_box').value; // Get data from text box
+        const response = await fetch(BLENDER_EXEC_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json' // Assuming data is JSON
+          },
+          body: JSON.stringify({ data: writingData }) // Sending data from text box
+        });
+        
+        console.log('response:', response);
+        
+        // Clear the text box
+        document.getElementById('writing_box').value = ''; 
       } catch (error) {
         console.error('Failed to execute Blender command:', error);
         alert('Failed to execute Blender command');
       }
     };
+    
   
     const handleDownloadModel = () => {
       const link = document.createElement('a');
