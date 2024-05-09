@@ -6,7 +6,7 @@ cd p22_p43
 
 sudo docker build -t blender_infinigen_headless . 
 
-sudo docker run --net=host server 
+sudo docker run --net=host --rm server 
 
 ```
 
