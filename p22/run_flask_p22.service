@@ -1,0 +1,11 @@
+[Unit]
+Description=Start p22 application
+After=network.target
+
+
+[Service]
+ExecStart=/usr/bin/python3 /opt/p22/p22.py
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
