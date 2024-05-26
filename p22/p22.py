@@ -4,7 +4,7 @@ from flask_cors import CORS
 import requests
 import subprocess
 
-LLM_HOST = "localhost"
+LLM_HOST = "localhost" # change with actuall IP for LLM_HOSt
 LLM_PORT = "5000"
 LLM_CHAT = "/chat"
 LLM_NEW_CHAT = "/start_new_chat"
