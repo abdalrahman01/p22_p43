@@ -16,15 +16,7 @@ const LLM_URL = `http://${LLM_HOST}:${LLM_PORT}/chat`;
 const LLM_URL_start_new = `http://${LLM_HOST}:${LLM_PORT}/start_new_chat`;
 const LLM_RESPONSE_FILE_LOCATION = "/opt/infinigen/testScene.py"
 
-function writePythonToFile(filepath, content) {
-    fs.writeFile(filepath, content, 'utf8', (err) => {
-        if (err) {
-            console.error(`Error writing to file ${filepath}:`, err);
-        } else {
-            console.log(`File ${filepath} has been saved.`);
-        }
-    });
-}
+
 const LoggedChatRoute = (props) => {
   const history = useHistory();
   const [searchTerm, setSearchTerm] = useState('');
@@ -72,7 +64,6 @@ const LoggedChatRoute = (props) => {
         });
         
         console.log('response:', response);
-        writePythonToFile(LLM_RESPONSE_FILE_LOCATION, response);
         
         // Clear the text box
         document.getElementById('writing_box').value = ''; 
