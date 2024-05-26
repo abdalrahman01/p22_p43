@@ -4,13 +4,32 @@ from flask_cors import CORS
 import requests
 import subprocess
 
-LLM_HOST = ""
+LLM_HOST = "localhost"
 LLM_PORT = "5000"
 LLM_CHAT = "/chat"
 LLM_NEW_CHAT = "/start_new_chat"
 LLM_RESPONSE_FILE_LOCATION = "/opt/infinigen/testScene.py"
-POST = 1
-GET = 2
+
+def invoke_command():
+    subprocess.run(["/opt/infinigen/blender/blender", "-b", "-P", "/opt/infinigen/testScene.py"]) 
+        
+def send_request_to_server(content, host, port):
+    payload = {"text", content}
+    headers = {'Content-Type': 'application/json'}
+    res = requests.get(f"http://{host}:{port}{LLM_CHAT}?text={content}")
+    print(res.url)
+    print(res.headers)
+    print(res.json)
+    
+    return res
+    
+def write_to_file(filepath, content):
+    with open(filepath, "w") as g:
+        g.write(content)
+
+
+
+
 app = Flask(__name__)
 CORS(app)
 @app.route('/')
@@ -18,30 +37,15 @@ def hello():
     return 'Hello, World!'
 
 
-@app.route('/update_python_script',  methods=['POST'])
+@app.route('/update_python_script')
 def update_python_script():
-    data = request.get_json()
-    if not data or 'text' not in data:
-        return jsonify({"error": "Missing 'text' field in request"}), 400
-    text = data['text']
-    res = send_requst_to_server(text, LLM_HOST, LLM_PORT)
+    text = request.args.get('text', '')
+    res = send_request_to_server(text, LLM_HOST, LLM_PORT)
     write_to_file(LLM_RESPONSE_FILE_LOCATION, res.text)
     invoke_command()
     return "success"
     
 
-def send_request_to_server(content, host, port, method=POST)
-    payload = {"text", content}
-    res = requests.post(f"{host}:{port}{LLM_CHAT}", payload)
-    return res
-    
-def write_to_file(filepath, content):
-    with open(filepath, "w") as g:
-        g.write(content)
-
-def invoke_command():
-    subprocess.run(["/opt/infinigen/blender/blender", "-b", "-P", "/opt/infinigen/testScene.py"]) 
-        
 
 
 if __name__ == '__main__':
