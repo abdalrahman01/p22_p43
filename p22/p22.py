@@ -9,14 +9,9 @@ def hello():
     return 'Hello, World!'
 
 
-@app.route('/update_python_script', methods=['POST'])
+@app.route('/update_python_script')
 def update_python_script():
-    user_text = request.form.get('writing_box')
     os.system('/opt/infinigen/blender/blender -b -P /opt/infinigen/testScene.py')
-    if user_text:
-        return f'{user_text} Update Python Script!'
-    else:
-        return 'No user text provided.'
-
+    return "update_python_script"
 if __name__ == '__main__':
     app.run(port=4056)
