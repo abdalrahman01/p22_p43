@@ -1,12 +1,12 @@
-# build the docker image  192.168.86.183
+# build the docker image
 ```
 git clone https://github.com/abdalrahman01/p22_p43.git
 
 cd p22_p43
 
-sudo docker build -t blender_infinigen_headless . 
+sudo docker build -t server . 
 
-sudo docker run --net=host --rm server 
+sudo docker run -p 3000:3000 server 
 
 ```
 
