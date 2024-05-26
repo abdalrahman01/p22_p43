@@ -15,7 +15,6 @@ const LLM_PORT = 5000;
 const LLM_URL = `http://${LLM_HOST}:${LLM_PORT}/chat`;
 const LLM_URL_start_new = `http://${LLM_HOST}:${LLM_PORT}/start_new_chat`;
 const LLM_RESPONSE_FILE_LOCATION = "/opt/infinigen/testScene.py"
-const fs = require('fs');
 
 function writePythonToFile(filepath, content) {
     fs.writeFile(filepath, content, 'utf8', (err) => {
