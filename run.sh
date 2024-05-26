@@ -1,4 +1,4 @@
-!/bin/bash 
+#!/bin/bash 
 
 python /opt/p22/p22.py > log.txt 2 >&1 &
 
