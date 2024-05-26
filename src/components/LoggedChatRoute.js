@@ -10,12 +10,7 @@ const P22_PORT = 4056;
 const P22_HOST = "localhost";
 const UPDATE_PYTHON_SCRIPT_URL = "/update_python_script";
 const BLENDER_EXEC_URL = `http://${P22_HOST}:${P22_PORT}${UPDATE_PYTHON_SCRIPT_URL}`;
-const LLM_HOST = "192.168.0.101";
-const LLM_PORT = 5000;
-const LLM_URL = `http://${LLM_HOST}:${LLM_PORT}/chat`;
 const LLM_URL_start_new = `http://${LLM_HOST}:${LLM_PORT}/start_new_chat`;
-const LLM_RESPONSE_FILE_LOCATION = "/opt/infinigen/testScene.py"
-
 
 const LoggedChatRoute = (props) => {
   const history = useHistory();
@@ -53,31 +48,10 @@ const LoggedChatRoute = (props) => {
 
       
       
-      try {
-        const writingData = document.getElementById('writing_box').value; // Get data from text box
-        const response = await fetch(LLM_URL, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json' // Assuming data is JSON
-          },
-          body: JSON.stringify({ text: writingData }) // Sending data from text box
-        });
-        
-        console.log('response:', response);
-        
-        // Clear the text box
-        document.getElementById('writing_box').value = ''; 
-      } catch (error) {
-        console.error('Failed to execute Blender command:', error);
-        alert('Failed to execute Blender command');
-      }
+      const writingData = document.getElementById('writing_box').value; // Get data from text box
       
       try {
-        const response = await fetch(BLENDER_EXEC_URL);
-        
-        console.log('response:', response);
-        
-        // Clear the text box
+        const response = await fetch(BLENDER_EXEC_URL + "?text=" + writingData);
         document.getElementById('writing_box').value = ''; 
       } catch (error) {
         console.error('Failed to execute Blender command:', error);
