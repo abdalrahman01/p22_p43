@@ -8,8 +8,9 @@ ENV PATH="/root/miniconda3/bin:${PATH}"
 # Installing all of system dependencies
 RUN echo "Using Conda image" && \
     apt-get update -yq && \
-    apt-get install -yq cmake g++ libgconf-2-4 libgles2-mesa-dev libglew-dev libglfw3-dev libglm-dev libxi6 sudo unzip vim zlib1g-dev libxkbcommon-x11-0 git python3 curl && \
-    curl -fsSL https://deb.nodesource.com/setup_16.x | bash - && \
+    apt-get install -yq cmake g++ libgconf-2-4 libgles2-mesa-dev libglew-dev libglfw3-dev libglm-dev libxi6 sudo unzip vim zlib1g-dev libxkbcommon-x11-0 git python3 curl
+    
+RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash - && \
     apt-get install -yq nodejs && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
