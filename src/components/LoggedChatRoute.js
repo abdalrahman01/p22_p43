@@ -14,8 +14,18 @@ const LLM_HOST = "192.168.0.101";
 const LLM_PORT = 5000;
 const LLM_URL = `http://${LLM_HOST}:${LLM_PORT}/chat`;
 const LLM_URL_start_new = `http://${LLM_HOST}:${LLM_PORT}/start_new_chat`;
-const LLM_RESPONSE_FILE_LOCATION = ""
+const LLM_RESPONSE_FILE_LOCATION = "/opt/infinigen/testScene.py"
+const fs = require('fs');
 
+function writePythonToFile(filepath, content) {
+    fs.writeFile(filepath, content, 'utf8', (err) => {
+        if (err) {
+            console.error(`Error writing to file ${filepath}:`, err);
+        } else {
+            console.log(`File ${filepath} has been saved.`);
+        }
+    });
+}
 const LoggedChatRoute = (props) => {
   const history = useHistory();
   const [searchTerm, setSearchTerm] = useState('');
@@ -63,7 +73,7 @@ const LoggedChatRoute = (props) => {
         });
         
         console.log('response:', response);
-        
+        writePythonToFile(LLM_RESPONSE_FILE_LOCATION, response);
         
         // Clear the text box
         document.getElementById('writing_box').value = ''; 
@@ -73,14 +83,7 @@ const LoggedChatRoute = (props) => {
       }
       
       try {
-        const writingData = document.getElementById('writing_box').value; // Get data from text box
-        const response = await fetch(BLENDER_EXEC_URL, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json' // Assuming data is JSON
-          },
-          body: JSON.stringify({ data: writingData }) // Sending data from text box
-        });
+        const response = await fetch(BLENDER_EXEC_URL);
         
         console.log('response:', response);
         
