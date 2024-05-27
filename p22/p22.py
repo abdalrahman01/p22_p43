@@ -9,6 +9,7 @@ LLM_PORT = "5000"
 LLM_CHAT = "/chat"
 LLM_NEW_CHAT = "/start_new_chat"
 LLM_RESPONSE_FILE_LOCATION = "/opt/infinigen/testScene.py"
+cors = CORS(app, resources={r"/update_python_script": {"origins": "*"}})
 
 def invoke_command():
     subprocess.run(["/opt/infinigen/blender/blender", "-b", "-P", "/opt/infinigen/testScene.py"]) 
@@ -37,13 +38,15 @@ def hello():
     return 'Hello, World!'
 
 
-@app.route('/update_python_script')
+@app.route('/update_python_script', methods=["GET"])
 def update_python_script():
     text = request.args.get('text', '')
     res = send_request_to_server(text, LLM_HOST, LLM_PORT)
     write_to_file(LLM_RESPONSE_FILE_LOCATION, res.text)
     invoke_command()
-    return "success"
+    response = flask.jsonify({'success': 'true'})
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    return response
     
 
 
