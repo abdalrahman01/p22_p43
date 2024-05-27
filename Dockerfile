@@ -64,6 +64,6 @@ RUN npm install
 WORKDIR /opt/
 RUN npm install
 
-COPY run.sh ./
+# COPY run.sh ./
 
-CMD ["bash", "run.sh"]
+# CMD ["bash", "run.sh"]
