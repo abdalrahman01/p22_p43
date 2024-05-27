@@ -44,9 +44,7 @@ def update_python_script():
     res = send_request_to_server(text, LLM_HOST, LLM_PORT)
     write_to_file(LLM_RESPONSE_FILE_LOCATION, res.text)
     invoke_command()
-    response = flask.jsonify({'success': 'true'})
-    response.headers.add('Access-Control-Allow-Origin', '*')
-    return response
+    return "200 ok"
     
 
 
