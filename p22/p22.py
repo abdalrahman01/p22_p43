@@ -50,4 +50,4 @@ def update_python_script():
 
 
 if __name__ == '__main__':
-    app.run(port=4056)
+    app.run(port=4056, host="*")
