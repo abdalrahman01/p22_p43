@@ -10,7 +10,6 @@ const P22_PORT = 4056;
 const P22_HOST = "localhost";
 const UPDATE_PYTHON_SCRIPT_URL = "/update_python_script";
 const BLENDER_EXEC_URL = `http://${P22_HOST}:${P22_PORT}${UPDATE_PYTHON_SCRIPT_URL}`;
-const LLM_URL_start_new = `http://${LLM_HOST}:${LLM_PORT}/start_new_chat`;
 
 const LoggedChatRoute = (props) => {
   const history = useHistory();
@@ -51,7 +50,12 @@ const LoggedChatRoute = (props) => {
       const writingData = document.getElementById('writing_box').value; // Get data from text box
       
       try {
-        const response = await fetch(BLENDER_EXEC_URL + "?text=" + writingData);
+        const response = await fetch(`${BLENDER_EXEC_URL}?text=${writingData}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
         document.getElementById('writing_box').value = ''; 
       } catch (error) {
         console.error('Failed to execute Blender command:', error);
