@@ -66,7 +66,7 @@ const LoggedChatRoute = (props) => {
   
     const handleDownloadModel = () => {
       const link = document.createElement('a');
-      link.href = '/models/cup_dish.glb'; // Change the path to your model file
+      link.href = '/models/generated_3d.glb'; // Change the path to your model file
       link.download = 'model.gltf';
       link.click();
     };
